@@ -28,18 +28,31 @@ int main()
 	// CKNN.readData("./cknn-dataset/05_musk2.csv");
 	// CKNN.readData("./cknn-dataset/06_Mutagenesis_atoms.csv");
 	// CKNN.readData("./cknn-dataset/07_Mutagenesis_chains.csv");
-	CKNN.readData("./cknn-dataset/08_Mutagensis_bounds.csv");
+	// CKNN.readData("./cknn-dataset/08_Mutagensis_bounds.csv");
 
 	hDistType = 0;
 	isOriginal = false;
 	int R = 2;  //2
 	int C = 4; 	//4
+	int max_grp = 0;
+
 
 	int start_s=clock();
 	
 	if(!isOriginal)
 		CKNN.grouping(1);
 	CKNN.init();
+
+	for (int bid = 0; bid < CKNN.dataset.size(); bid++)
+	{
+		int grp_size = CKNN.dataset[bid].grp.size();
+		// int inst_size = CKNN.dataset[bid].ins.size();
+		// std::cout << "bid: "<< bid <<" grp_num: "<< grp_size << std::endl;
+		// std::cout << "bid: "<< bid <<" inst_num: "<< inst_size << std::endl;
+		max_grp = grp_size > max_grp? grp_size: max_grp;
+	}
+	std::cout << "max_grp_num: " << max_grp << std::endl;
+
 	vector<int> res;
 
 	for(int i = 0; i < CKNN.dataset.size(); i++)	

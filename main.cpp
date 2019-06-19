@@ -20,24 +20,29 @@ extern int distCount;
 int main()
 {
 	citationKNN CKNN;
-	//CKNN.readData("harddrive1.csv");
-	//CKNN.readData("protein.csv");
-	//CKNN.readData("corel.csv");
-	//CKNN.readData("bc.csv");
-	//CKNN.readData("output.csv");
-	CKNN.readData("clean2.data");
-	//CKNN.readData("webRecom2.csv");
+
+	// CKNN.readData("./cknn-dataset/01_elephant.csv");
+	// CKNN.readData("./cknn-dataset/02_fox.csv");
+	// CKNN.readData("./cknn-dataset/03_tiger.csv");
+	// CKNN.readData("./cknn-dataset/04_musk1.csv");
+	// CKNN.readData("./cknn-dataset/05_musk2.csv");
+	// CKNN.readData("./cknn-dataset/06_Mutagenesis_atoms.csv");
+	// CKNN.readData("./cknn-dataset/07_Mutagenesis_chains.csv");
+	CKNN.readData("./cknn-dataset/08_Mutagensis_bounds.csv");
+
 	hDistType = 0;
 	isOriginal = false;
-	int R = 2;
-	int C = 4;
+	int R = 2;  //2
+	int C = 4; 	//4
+
 	int start_s=clock();
+	
 	if(!isOriginal)
 		CKNN.grouping(1);
 	CKNN.init();
 	vector<int> res;
-	for(int i = 0; i < CKNN.dataset.size(); i++)
-	//for(int i = 0; i < 1; i++)
+
+	for(int i = 0; i < CKNN.dataset.size(); i++)	
 	{
 		cout<<"Pkg: "<<i<<endl;
 		CKNN.clean(i); //clean all existing info about i
@@ -51,8 +56,8 @@ int main()
 	cout << "time: " << (stop_s-start_s)/double(CLOCKS_PER_SEC)*1000 << endl;
 	
 	for(int i = 0; i < res.size(); i++)
-		cout<<res[i]<<" ";
-	cout<<endl;
+		cout<< "[ "<< i << "] " << res[i] << std::endl;
+
 	int accurateItem = 0;
 	for(int i = 0; i < res.size(); i++)
 	{
@@ -70,5 +75,6 @@ int main()
 	cout<<"total:"<<SUM<<endl;
 	cout<<"grp amount:"<<CKNN.numGroups<<endl;
 	cout<<"avg dist:"<<distSum / distCount<<endl;
+	
 	return 0;
 }

@@ -17,11 +17,14 @@ extern bool isOriginal;
 extern double distSum;
 extern int distCount;
 
-int main()
+int main(int argc, char** argv)
 {
 	citationKNN CKNN;
 
-	CKNN.readData("./cknn-dataset/01_elephant.csv");
+	std::string dataPath(argv[1]);
+	
+	CKNN.readData(dataPath);
+	// CKNN.readData("./cknn-dataset/01_elephant.csv");
 	// CKNN.readData("./cknn-dataset/02_fox.csv");
 	// CKNN.readData("./cknn-dataset/03_tiger.csv");
 	// CKNN.readData("./cknn-dataset/04_musk1.csv");
@@ -31,9 +34,9 @@ int main()
 	// CKNN.readData("./cknn-dataset/08_Mutagenesis_chains.csv");
 
 	hDistType = 0;
-	// isOriginal = false;
-	int R = 2;  //2
-	int C = 4; 	//4
+	isOriginal = true;
+	int R = 2;  
+	int C = 4; 
 	int max_grp = 0;
 
 	int start_s=clock(), start_k, end_k, acc_k = 0;
@@ -72,9 +75,6 @@ int main()
 	cout << "time: " << (stop_s-start_s)/double(CLOCKS_PER_SEC)*1000  << " ms" << endl;
 	cout << "Kernel time: " << acc_k/double(CLOCKS_PER_SEC)*1000  << " ms" << endl;
 
-	// for(int i = 0; i < res.size(); i++)
-	// 	cout<< "[ "<< i << "] " << res[i] << std::endl;
-
 	int accurateItem = 0;
 	for(int i = 0; i < res.size(); i++)
 	{
@@ -92,6 +92,5 @@ int main()
 	// cout<<"total:"<<SUM<<endl;
 	// cout<<"grp amount:"<<CKNN.numGroups<<endl;
 	// cout<<"avg dist:"<<distSum / distCount<<endl;
-	
 	return 0;
 }
